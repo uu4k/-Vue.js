@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js App</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="handleClick">Click</button>
+        <p>{{ message }}</p>
+        <input v-model="message">
+        <p>{{ count }}</p>
+        <input v-model.number="count">
+        <ol>
+            <li v-for="item in list">{{ item }}</li>
+        </ol>
+        <p v-if="show">Show is True</p>
+        <p v-if="!show">Show is False</p>
+        <button v-on:click="show=!show">切り替え</button>
+        <transition>
+            <p v-if="show">Hello Vue.js!</p>
+        </transition>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
