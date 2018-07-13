@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "slime",
+        "hp": 1000
+    },
+    {
+        "id": 2,
+        "name": "goblin",
+        "hp": 3000
+    },
+    {
+        "id": 3,
+        "name": "dragon",
+        "hp": 9999
+    }
+]

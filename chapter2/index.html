@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <p>{{ message }}</p>
+        <p>{{ message.length }}</p>
+        <p>{{ state }}</p>
+        <p>{{ list[2] }}</p>
+        <p>{{ list.length }}</p>
+
+        <!-- 属性には使えない -->
+        <!-- <input type="text" value="{{ message }}"> -->
+        <input type="text" v-bind:value="message">
+        <input type="text" :value="message">
+
+        <div v-bind:text-content.prop="message"></div>
+        <div v-bind:scroll-top.prop="scroll"></div>
+
+        <p>{{ count }}</p>
+        <button v-on:click="increment">count++</button>
+
+        <!-- dataの内容確認 -->
+        <pre>{{ $data }}</pre>
+
+        <p v-bind:class="{ child: isChild, 'is-active': isActive }">Text</p>
+        <!-- 属性マージ -->
+        <p style="color:blue; font-size: 42px" v-bind:style="{ color: textColor, 'backgroundColor': bgColor }">Text</p>
+
+        <p v-bind:class="classObject">classObject</p>
+        <p v-bind:style="styleObject">classObject</p>
+
+        <img v-bind="item" v-bind:id="'thumb-' + item.id">
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <circle cx="100" cy="75" v-bind:r="radius" fill="lightpink" />
+        </svg>
+        <input type="range" min="0" max="100" v-model="radius">
+        <!-- コメントによる表示制御 -->
+        <div v-if="ok">v-if ok</div>
+        <!-- スタイルによる表示制御 -->
+        <div v-show="ok">v-show ok</div>
+
+        <template v-if="ok">
+            <header>title</header>
+            <div>content</div>
+        </template>
+
+        <!-- 同じ要素でifelseする場合はユニークkeyをつける -->
+        <div v-if="type === 'A'" key="typeA">
+            A
+        </div>
+        <div v-else-if="type === 'B'" key="typeB">
+            B
+        </div>
+        <div v-else>
+            C
+        </div>
+
+        <ul>
+            <!-- 仮想DOM更新の最適化のためkey設定 -->
+            <li v-for="item in list" v-bind:key="'list1-' + item.id">
+                ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+            </li>
+            <li v-for="(item, index) in list" v-bind:key="'list2-' + item.id">
+                index.{{ index }} ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+            </li>
+            <li v-for="item in list" v-bind:key="'list3-' + item.id" v-bind:class="{ tuyoi: item.hp > 300 }">
+                ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+                <span v-if="item.hp > 300">tuyoi!</span>
+            </li>
+            <li v-for="(item, index) in list" v-bind:key="'list4-' + item.id" v-if="item.hp < 300">
+                ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+                <span v-if="item.hp > 300">tuyoi!</span>
+                <button v-on:click="doRemove(index)">del</button>
+            </li>
+        </ul>
+        <input v-model="name">
+        <button v-on:click="doAdd">add monster</button>
+        <!-- forのスコープ外確認 -->
+        <pre>{{ item }}</pre>
+
+        <!-- コンパイルスキップ(変換しない) -->
+        <p v-pre>{{ $data }}</p>
+
+        <p>count: {{ count }}</p>
+        <!-- 初回コンパイル以降は静的コンテンツ -->
+        <p v-once>v-once count: {{ count }}</p>
+
+        <!-- テキストに使う -->
+        <p v-text="count">v-text: </p>
+
+        <!-- htmlエスケープさせない方法 -->
+        <p>{{ htmlmessage }}</p>
+        <p v-html="htmlmessage"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
