@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div>
+            <button v-on:click="handleClick">alert</button>
+            <button @click="handleClick">alert</button>
+        </div>
+        <div>
+            <img src="neko.jpg" v-on:load="show=true" v-bind:class="{hide: !show}">
+        </div>
+        <div>
+            <p>{{ message }}</p>
+            <input v-bind:value="message" v-on:input="handleInput">
+            <input v-model="message"> not use v-model:
+            <textarea>{{ message }}</textarea>
+            use v-model:
+            <textarea v-model="message"></textarea>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" v-model="ok"> {{ ok }}
+            </label>
+            <label>
+                checkedは無視される
+                <input checked type="checkbox" v-model="ok"> {{ ok }}
+            </label>
+            <label>
+                <input type="checkbox" v-model="yn" true-value="y" false-value="n"> {{ yn }}
+            </label>
+            <label><input type="checkbox" v-model="checklist" value="A">A</label>
+            <label><input type="checkbox" v-model="checklist" value="B">B</label>
+            <label><input type="checkbox" v-model="checklist" value="C">C</label>
+            <label><input type="radio" v-model="radio" value="a">a</label>
+            <label><input type="radio" v-model="radio" value="b">b</label>
+            <label><input type="radio" v-model="radio" value="c">c</label>
+            <select v-model="selectbox" multiple>
+                <option value="aiueo">aiueo</option>
+                <option value="kakikukeko">kakikukeko</option>
+                <option value="sasiseso">sasisuseso</option>
+            </select>
+            <input type="file" v-on:change="handleChange">
+            <div v-if="preview"><img v-bind:src="preview"></div>
+            v-model.number:<input type="text" v-model.number="price"> {{ price }}
+            v-model<input type="text" v-model="price"> {{ price }}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
