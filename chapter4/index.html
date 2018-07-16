@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <p>{{ width }} / 2 = {{ halfwidth }}</p>
+            <p>{{ height }} / 2 = {{ halfheight }}</p>
+            <input v-model="halfheight">
+        </div>
+        <div>
+            <p>computeの方の結果はキャッシュされる(依存しているリアクティブデータの変更で再構築)</p>
+            <ol>
+                <li>{{ computerandomdata }}</li>
+                <li>{{ computerandomdata }}</li>
+            </ol>
+            <p>methosの結果はキャッシュされない</p>
+            <ol>
+                <li>{{ methodsrandomdata() }}</li>
+                <li>{{ methodsrandomdata() }}</li>
+            </ol>
+        </div>
+        <div>
+            <input v-model.number="budget"> 円以下に絞り込む
+            <input v-model.number="limit"> 件を表示
+            <p>{{ matched.length }} 件中 {{ limited.length }} 件を表示</p>
+            <ul>
+                <li v-for="item in limited" v-bind:key="item.id">
+                    {{ item.name }} {{ item.price }} 円
+                </li>
+            </ul>
+        </div>
+<input v-model="val">
+<div>
+    <ul>
+        <li v-for="(item, index) in list" v-bind:key="'list-' + item">
+            <input v-model="list[index]">
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(item, index) in list2" v-bind:key="'list2-' + item.name">
+            <input v-model="list2[index].name"> :
+            <input v-model.number="list2[index].price">
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(item, index) in list3" v-bind:key="'list3-' + item.name">
+            <input v-model="list3[index].name"> :
+            <input v-model.number="list3[index].price">
+        </li>
+    </ul>
+</div>
+<div>
+    <input v-model="width"> *
+    <input v-model="height">
+</div>
+<select v-model="current">
+    <option v-for="topic in topics" v-bind:value="topic.value">
+        {{ topic.name }}
+    </option>
+</select>
+<div v-for="item in repolist">{{ item.full_name }}</div>
+<p>{{ price | localeNum }}</p>
+<button v-on:click="list4.push(list4.length+1)">add</button>
+<ul ref="list4">
+    <li v-for="item in list4">{{ item }}</li>
+</ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
