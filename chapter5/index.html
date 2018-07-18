@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <!-- component名は-を含むケバブケースでないといけない -->
+        <!-- <myComponent></myComponent> -->
+        <!-- 独自コンポーネントでDOMイベントハンドリングしたい場合は.native付ける必要がある -->
+        <my-component2 v-on:click.native="handleClick"></my-component2>
+        <my-component3></my-component3>
+        <ul>
+            <comp-child-li v-for="item in list" v-bind:key="item.id" v-bind="item" v-on:attack="handleAttack"></comp-child-li>
+        </ul>
+        <div>
+            <!-- childs-eventという独自イベント用意して子から呼び出す -->
+            <comp-child-emitter v-on:childs-event="parentsMethod"></comp-child-emitter>
+        </div>
+        <div>
+            <comp-child-slot>
+                this is slot content.
+            </comp-child-slot>
+            <comp-child-slot>
+                {{ message }}
+            </comp-child-slot>
+            <comp-child-multi-slot>
+                <header slot="header">
+                    Hello Vue.js!
+                </header>
+                <template slot="footer">
+                    This is footer.
+                </template>
+                Vue.js is Javascript framework.
+            </comp-child-multi-slot>
+            <comp-child-scope-slot>
+                <p slot-scope="props">slot's text -> {{ props.text }}</p>
+            </comp-child-scope-slot>
+        </div>
+        <div>
+            <p>parentdate: {{ date }}</p>
+            <!-- 以下の2つは同じ -->
+            <my-calendar v-model="date"></my-calendar>
+            <my-calendar v-bind:value="date" v-on:input="date = $event"></my-calendar>
+        </div>
+        <my-monster
+        v-bind:name.sync="name"
+        v-bind:hp.sync="hp"
+        ></my-monster>
+        <div>
+            tableのように内部要素が制限されている場合はisを使う
+            <table>
+                <my-row></my-row>
+            </table>
+            <table>
+                <tr is="my-row"></tr>
+            </table>
+        </div>
+        <div>
+            <functional-component v-bind:message="message"></functional-component>
+            <button v-on:click="current^=1">toggle</button>
+            <div v-bind:is="component"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
