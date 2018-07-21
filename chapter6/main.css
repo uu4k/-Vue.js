@@ -1,0 +1,57 @@
+/* v-*enter*なクラスがtransition内に追加されたDOM要素に付与される */
+/* v-*leave*なクラスがtransition内から削除されたDOM要素に付与される */
+/* prefixはtransitionのname属性で指定が可能 */
+
+/* activeクラスはDOMの追加(削除)前からtransitionが完了するまで付与される */
+.v-enter-active, .v-leave-active {
+    transition: opacity 1s;
+}
+
+/* v-enter->v-enter-toの順でクラスが付与される */
+/* v-leave->v-leave-toの順でクラスが付与される */
+.v-enter, .v-leave-to {
+    opacity: 0;
+}
+
+/* opacityはデフォルトで1なので指定不要 */
+/* .v-enter-to, .v-leave {
+    opacity: 1;
+} */
+
+/* moveはリスト要素移動時に適応するクラス */
+.v-move {
+    transition: transform 1s;
+}
+
+.absolute-leave-active {
+    position: absolute;
+}
+
+.absolute-enter-active, .absolute-leave-active {
+    transition: opacity 1s;
+}
+
+.absolute-enter, .absolute-leave-to {
+    opacity: 0;
+}
+
+.demo-enter-active, .demo-leave-active {
+    transition: opacity 5s;
+}
+
+.demo-enter, .demo-leave-to {
+    opacity: 0;
+}
+
+.circle-enter-active, .circle-leave-active {
+    transition: all 1s;
+}
+
+.circle-leave-active {
+    position: absolute;
+}
+
+.circle-enter, .circle-leave-to {
+    opacity: 0;
+    transform: translateX(-20px);
+}

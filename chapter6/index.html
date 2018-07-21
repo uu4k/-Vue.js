@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="show=!show">toggle</button>
+        <transition>
+            <div v-show="show">trasnsition element</div>
+        </transition>
+        <transition name="demo">
+            <div v-show="show">trasnsition element(transition name=demo)</div>
+        </transition>
+        <transition appear>
+            <div v-show="show">trasnsition element(appear)</div>
+        </transition>
+        <transition name="absolute">
+            <div v-if="show" key="a">TRUE</div>
+            <div v-else="show" key="b">FALSE</div>
+        </transition>
+        <button v-on:click="count++">count++</button>
+        <transition name="absolute">
+            <div v-bind:key="count">{{ count }}</div>
+        </transition>
+        <transition name="absolute">
+            <!-- DOM要素の追加削除はされない -->
+            <div>{{ count }}</div>
+        </transition>
+        <button v-on:click="order=!order">sort</button>
+        <transition-group class="list" tag="ul">
+            <li v-for="item in sortedList" v-bind:key="item.id">
+                {{ item.name }} {{ item.price }}円
+            </li>
+        </transition-group>
+        <button v-on:click="toggle=!toggle">toggle</button>
+        <svg xmlns="http://www.w4.org/2000/svg" version="1.1">
+            <transition name="circle">
+                <my-circle v-bind:fill="fill" v-bind:key="fill"></my-circle>
+            </transition>
+        </svg>
+        <!-- トランザクションフックを設定 -->
+        <transition v-on:enter="enter" v-on:after-enter="afterEnter">
+            <div v-if="show">example</div>
+        </transition>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
