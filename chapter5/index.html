@@ -66,7 +66,17 @@
         <div>
             <functional-component v-bind:message="message"></functional-component>
             <button v-on:click="current^=1">toggle</button>
+            <!-- is属性はコンポーネントを指定できる特別な属性 -->
             <div v-bind:is="component"></div>
+        </div>
+        <div>
+            <button v-on:click="current2='comp-board'">message list</button>
+            <button v-on:click="current2='comp-form'">form</button>
+            <button v-on:click="current2='comp-form2'">form2</button>
+            <!-- keep-aliveにすることでコンポーネントの表示が切り替わっても状態を保持する -->
+            <keep-alive>
+                <div v-bind:is="current2"></div>
+            </keep-alive>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>

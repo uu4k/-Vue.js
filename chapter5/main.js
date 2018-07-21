@@ -173,6 +173,25 @@ Vue.component('my-component-b', {
     },
 })
 
+Vue.component('comp-board', {
+    template: '<div>Message Board</div>',
+})
+
+Vue.component('comp-form', {
+    template: '<div>form<textarea v-model="message"></textarea></div>',
+    data: function() {
+        return { message: '' }
+    }
+})
+
+Vue.component('comp-form2', {
+    template: '<div>form<textarea v-model="message"></textarea></div>',
+    data: function() {
+        return { message: '' }
+    }
+})
+
+
 var myComponent2 = {
     template: '<p>MyComponent2</p>'
 }
@@ -190,7 +209,8 @@ var app = new Vue({
         name: 'slime',
         hp: 100,
         componentTypes: ['my-component-a', 'my-component-b'],
-        current: 0
+        current: 0,
+        current2: 0
     },
     computed: {
         component: function() {
