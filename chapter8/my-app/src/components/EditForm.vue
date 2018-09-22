@@ -19,19 +19,19 @@ export default {
         }
     },
     created() {
-        console.log(store.state.moduleA.count)
-        console.log(store.state.moduleB.count)
-        console.log(store.state.moduleC.count)
-        // moduleA,B両方のupdateのmutationが実行される
-        store.commit('update')
-        console.log(store.state.moduleA.count)
-        console.log(store.state.moduleB.count)
-        console.log(store.state.moduleC.count)
+        // console.log(store.state.moduleA.count)
+        // console.log(store.state.moduleB.count)
+        // console.log(store.state.moduleC.count)
+        // // moduleA,B両方のupdateのmutationが実行される
+        // store.commit('update')
+        // console.log(store.state.moduleA.count)
+        // console.log(store.state.moduleB.count)
+        // console.log(store.state.moduleC.count)
 
-        // moduleのnamespace: trueにしている場合
-        store.commit('moduleC/update')
-        console.log(store.state.moduleC.count)
-        console.log(store.state.moduleC2.count)
+        // // moduleのnamespace: trueにしている場合
+        // store.commit('moduleC/update')
+        // console.log(store.state.moduleC.count)
+        // console.log(store.state.moduleC2.count)
 
     },
     // methods: {

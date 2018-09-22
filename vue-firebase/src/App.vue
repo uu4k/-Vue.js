@@ -42,6 +42,9 @@
 import firebase from 'firebase'
 // 改行を <br> タグに変換するモジュール
 import Nl2br from 'vue-nl2br'
+
+import 'firebase/firestore'
+
 export default {
   components: { Nl2br },
   data() {
@@ -54,15 +57,16 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged(user => {
       this.user = user ? user : {}
-      const ref_message = firebase.database().ref('message')
       if (user) {
         this.chat = []
-        // message に変更があったときのハンドラを登録
-        ref_message.limitToLast(10).on('child_added', this.childAdded)
-      } else {
-        // message に変更があったときのハンドラを解除
-        ref_message.limitToLast(10).off('child_added', this.childAdded)
       }
+      // TODO sort, limit
+      // firebase.firestore().collection('messages').orderBy("created_at", "desc").limit(10).onSnapshot((querySnapshot) => {
+      firebase.firestore().collection('messages').onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((snap) => {
+          this.childAdded(snap)
+        });
+      })
     })
   },
   methods: {
@@ -84,9 +88,10 @@ export default {
     // 受け取ったメッセージをchatに追加
     // データベースに新しい要素が追加されると随時呼び出される
     childAdded(snap) {
-      const message = snap.val()
+      const message = snap.data()
+      console.log(message)
       this.chat.push({
-        key: snap.key,
+        key: snap._key,
         name: message.name,
         image: message.image,
         message: message.message
@@ -96,11 +101,11 @@ export default {
     doSend() {
       if (this.user.uid && this.input.length) {
         // firebase にメッセージを追加
-        firebase.database().ref('message').push({
+        firebase.firestore().collection('messages').add({
           message: this.input,
           name: this.user.displayName,
           image: this.user.photoURL
-        }, () => {
+        }).then(() => {
           this.input = '' // フォームを空にする
         })
       }

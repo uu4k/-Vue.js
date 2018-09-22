@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 Vue.config.productionTip = false
 
@@ -14,8 +15,8 @@ var config = {
   projectId: "chat-app-c0599",
   storageBucket: "chat-app-c0599.appspot.com",
   messagingSenderId: "317001005268"
-};
-firebase.initializeApp(config);
+}
+firebase.initializeApp(config)
 
 /* eslint-disable no-new */
 new Vue({
